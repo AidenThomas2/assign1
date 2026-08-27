@@ -2,17 +2,28 @@
 
 ## Instructions
 
-Demonstrate your understanding of Object-Oriented Programming (OOP) concepts, array management, basic text file I/O processing, and interface implementation.  Using the starter Eclipse Project, implement the provided interface, **OrderDBInterface.java**.  Name your implementation **OrderDB**. And test your implementation with a separate **Driver.java** program.  The orders text file (**orders.txt**) contains the 50 example orders with a header record at the top of the file.
+Using the starter Eclipse Project, implement the provided interface, **OrderDBInterface.java**.  Name your implementation **OrderDB**. And test your implementation with a separate **Driver.java** program.  The orders text file (**orders.txt**) contains the 50 example orders with a header record at the top of the file. Create an **Order.java** class that describes an Order record from the text file. *The initial size of your Array should be 25.*  
 
 ```java
 package dsPreAssess;
 
 public interface OrderDBInterface {
-    void loadOrders(String fileName);
-    void showOrders();
+    int loadOrders(String fileName);    //Loads the orders into the array from the specified file. Returns the number of orders loaded.
+    int saveOrders(String fileName);    //Saves the orders from the array in the specified file. Returns the number of records written.
+    void showOrders();                  //Display the Orders from the File
+    boolean add(Order order);            //Add order to the End of the array. Returns true if successful.
+    void add(int index, Order order);    //Inserts the order at the specified position in this array.
+    void clear();                        //Removes all orders
+    Order get(int index);                //Returns the order at the specified position in the array
+    int searchByOrderID(int orderID);    //Returns the location of the order with the specified orderID in the array.  Returns -1 if not found.
+    Order remove(int index);             //Removes the order at the specified position in the array. Returns the removed order.
+    Order set(int index, Order order);   //Replaces the order at the specified position in the array with with the new order.  Returns the order that was replaced
+    int size();                          //Returns the number of orders in the array
+    int capacity();                      //Returns the allocated size of the array.  
+    void resize();                       //Resize the Array by 25 additional elements.
 }
 ```
-The **loadOrders()** should load the file contents into an array(**Not an ArrayList**). The display output created from your **showOrders()** implementation should look EXACTLY like the following:
+The **loadOrders()** should load the file contents into an **Array(Not an ArrayList**). The display output created from your **showOrders()** implementation should look EXACTLY like the following:
 
 ```
 Order ID Product                         Total Amt
