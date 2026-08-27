@@ -1,8 +1,8 @@
-## CSCE 20003 Data Structures Pre-Assessment
+## CSCE 20003 Data Structures Assignment One
 
 ## Instructions
 
-Using the starter Eclipse Project, implement the provided interface, **OrderDBInterface.java**.  Name your implementation **OrderDB**. And test your implementation with a separate **Driver.java** program.  The orders text file (**orders.txt**) contains the 50 example orders with a header record at the top of the file. Create an **Order.java** class that describes an Order record from the text file. *The initial size of your Array should be 25.*  
+This is a revision of your pre-assessment. Using the starter Eclipse Project, implement the provided interface, **OrderDBInterface.java**.  Name your implementation **OrderDB**. And test your implementation with a separate **Driver.java** program.  The orders text file (**orders.txt**) contains the 50 example orders with a header record at the top of the file. Create an **Order.java** class that describes an Order record from the text file. *The initial size of your Array should be 25.*  
 
 ```java
 package dsPreAssess;
