@@ -83,10 +83,10 @@ public class OrderDB implements OrderDBInterface {
 		ordersArr = tempArrs;
 		
 		
-		if (ordersArr[(ordersArr.length)-1].getDate().equals("0/0/0")) {
-		return false;	
+		if (ordersArr[(ordersArr.length)-1] == order) {
+		return true;	
 		} else {
-			return true;
+			return false;
 		}
 	}
 
