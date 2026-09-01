@@ -7,7 +7,7 @@ public class Driver {
 		
 		o.loadOrders("orders.txt");
 		o.showOrders();
-		o.add(12, new Order(1234, "John", "Staple", 22.34, "10/10/10"));
+		o.add(12, new Order(1234, "John", "Stapler", 22.34, "10/10/10"));
 		o.showOrders();
 	}
 

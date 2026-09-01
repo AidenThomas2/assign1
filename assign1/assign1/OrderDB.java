@@ -98,8 +98,8 @@ public class OrderDB implements OrderDBInterface {
 			tempArrs[i] = ordersArr[i];
 		}
 		tempArrs[index] = order;
-		for (int i = (index + 1); i < (tempArrs.length - 1); i++) {
-			tempArrs[i] = ordersArr[i];
+		for (int i = index; i < ordersArr.length ; i++) {
+			tempArrs[i + 1] = ordersArr[i];
 		}
 		
 		ordersArr = tempArrs;
@@ -107,50 +107,79 @@ public class OrderDB implements OrderDBInterface {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		for (int i = 0; i < ordersArr.length; i++) {
+			ordersArr[i] = null;
+		}
 	}
 
 	@Override
 	public Order get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return ordersArr[index];
 	}
 
 	@Override
 	public int searchByOrderID(int orderID) {
-		// TODO Auto-generated method stub
-		return 0;
+		for (int i = 0; i < ordersArr.length; i++) {
+			if (ordersArr[i].getOrderID() == orderID ) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	@Override
 	public Order remove(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		Order[] tempArr = new Order[(ordersArr.length) - 1];
+		for (int i = 0; i < index; i++) {
+			tempArr[i] = ordersArr[i];
+		}
+		Order o = new Order();
+		o = ordersArr[index];
+		for (int i = index+1; i < ordersArr.length; i++) {
+			tempArr[i-1] = ordersArr[i];
+		}
+		ordersArr = tempArr;
+		return o;
 	}
 
 	@Override
 	public Order set(int index, Order order) {
-		// TODO Auto-generated method stub
-		return null;
+		Order[] tempArr = new Order[ordersArr.length];
+		for (int i = 0; i < index; i++) {
+			tempArr[i] = ordersArr[i];
+		}
+		Order o = ordersArr[index];
+		tempArr[index] = order;
+		for (int i = index + 1; i < ordersArr.length; i++) {
+			tempArr[i] = ordersArr[i];
+		}
+		ordersArr = tempArr;
+		return o;
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		int size = 0;
+		for (int i = 0; i < ordersArr.length; i++) {
+			if (ordersArr[i] != null) {
+				size++;	
+			}
+		}
+		return size;
 	}
 
 	@Override
 	public int capacity() {
-		// TODO Auto-generated method stub
-		return 0;
+		return ordersArr.length;
 	}
 
 	@Override
 	public void resize() {
-		// TODO Auto-generated method stub
-		
+		Order[] tempArr = new Order[(ordersArr.length)+25];
+		for (int i = 0; i < ordersArr.length; i++) {
+			tempArr[i] = ordersArr[i];
+		}
+		ordersArr = tempArr;
 	}
 
 }
