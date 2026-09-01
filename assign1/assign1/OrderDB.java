@@ -6,28 +6,26 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class OrderDB implements OrderDBInterface {
-	String[][] ordersArr = new String[25][5];
+	Order[] ordersArr = new Order[25];
 
 	
 	public int loadOrders(String fileName) {
 		try {
-			BufferedReader orders = new BufferedReader(new FileReader(fileName)); // opening file
-			orders.readLine(); //get rid of that header
-			int row = 0; // rows
-			String line = orders.readLine(); // put the 2nd line after the header into this string
+			BufferedReader ordersFile = new BufferedReader(new FileReader(fileName)); // opening file
+			ordersFile.readLine(); //get rid of that header
+			int ords = 0; // orders
+			String line = ordersFile.readLine(); // put the 2nd line after the header into this string
 			while (line != null) // loop through the entire file
 				{
 					String[] entries = line.split(","); // split into an array
-					for (int i = 0; i < ordersArr[row].length; i++)//loop through an array
-						{
-							ordersArr[row][i] = entries[i]; // put the entries into a row
-						}
-					row++; // increment the row
-					line = orders.readLine(); // read another line
+					Order orders = new Order(Integer.parseInt(entries[0]),entries[1],entries[2],Double.parseDouble(entries[3]), entries[4]);// put the entries into an object
+					ordersArr[ords] = orders;
+					ords++; // increment the row
+					line = ordersFile.readLine(); // read another line
 				} // end of while loop
 				
-				orders.close();
-				return row;
+				ordersFile.close();
+				return ords;
 			}
 		catch (IOException e) 
 			{
@@ -36,7 +34,7 @@ public class OrderDB implements OrderDBInterface {
 		return -1; // No orders loaded
 	}
 	
-	public int saveOrders(String fileName) {
+	/*public int saveOrders(String fileName) {
 		try {
 			BufferedWriter writeOrders = new BufferedWriter(new FileWriter(fileName));
 			writeOrders.write("Order_ID,Customer_Name,Product,Total_Amt,Order_Date\n");
@@ -58,7 +56,7 @@ public class OrderDB implements OrderDBInterface {
 			System.out.println(e.getMessage());
 		}
 		return -1; 
-	}
+	}*/
 	
 	
 	public void showOrders() {
