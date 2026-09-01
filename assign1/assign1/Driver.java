@@ -6,7 +6,8 @@ public class Driver {
 		OrderDB o = new OrderDB();
 		
 		o.loadOrders("orders.txt");
-		o.saveOrders("testorder.txt");
+		o.showOrders();
+		o.add(12, new Order(1234, "John", "Staple", 22.34, "10/10/10"));
 		o.showOrders();
 	}
 

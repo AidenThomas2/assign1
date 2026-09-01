@@ -93,8 +93,16 @@ public class OrderDB implements OrderDBInterface {
 
 	@Override
 	public void add(int index, Order order) {
-		// TODO Auto-generated method stub
+		Order[] tempArrs = new Order[(ordersArr.length)+1];
+		for (int i = 0; i < index; i++) {
+			tempArrs[i] = ordersArr[i];
+		}
+		tempArrs[index] = order;
+		for (int i = (index + 1); i < (tempArrs.length - 1); i++) {
+			tempArrs[i] = ordersArr[i];
+		}
 		
+		ordersArr = tempArrs;
 	}
 
 	@Override
