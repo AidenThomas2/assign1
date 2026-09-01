@@ -1,0 +1,26 @@
+Order_ID,Customer_Name,Product,Total_Amt,Order_Date
+1001,Kevin Bacon,Mechanical Keyboard,263.42,2026-03-04
+1002,Charlie Brown,Mechanical Keyboard,220.60,2026-04-19
+1003,Alice Smith,Mechanical Keyboard,185.88,2026-06-04
+1004,Ian Malcolm,HD Monitor 27,777.70,2026-04-25
+1005,Evan Wright,Wireless Mouse,497.76,2026-03-29
+1006,Charlie Brown,HD Monitor 27,147.72,2026-04-08
+1007,Fiona Gallagher,Noise Canceling Headphones,518.05,2026-01-12
+1008,Ian Malcolm,Mechanical Keyboard,165.60,2026-03-17
+1009,Oscar Martinez,Noise Canceling Headphones,397.10,2026-01-18
+1010,Kevin Bacon,HD Monitor 27,1035.15,2026-08-07
+1011,Nina Williams,Mechanical Keyboard,432.48,2026-06-12
+1012,Charlie Brown,Noise Canceling Headphones,255.54,2026-03-10
+1013,Julia Roberts,USB-C Hub,1296.30,2026-02-11
+1014,George Clark,Ergonomic Chair,442.85,2026-03-25
+1015,Diana Prince,Wireless Mouse,448.17,2026-01-17
+1016,Oscar Martinez,External SSD 1TB,258.69,2026-05-08
+1017,Oscar Martinez,Webcam 1080p,207.46,2026-03-05
+1018,Ian Malcolm,Ergonomic Chair,792.65,2026-05-30
+1019,Fiona Gallagher,HD Monitor 27,371.38,2026-01-24
+1020,Nina Williams,Mechanical Keyboard,450.38,2026-07-22
+1021,Julia Roberts,Mechanical Keyboard,571.36,2026-04-30
+1022,Evan Wright,Desk Pad,242.89,2026-01-30
+1023,Michael Scott,Ergonomic Chair,157.11,2026-04-22
+1024,Hannah Abbott,Wireless Mouse,1021.74,2026-07-15
+1025,Ian Malcolm,Mechanical Keyboard,890.88,2026-05-10

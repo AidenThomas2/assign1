@@ -15,17 +15,24 @@ public class OrderDB implements OrderDBInterface {
 			ordersFile.readLine(); //get rid of that header
 			int ords = 0; // orders
 			String line = ordersFile.readLine(); // put the 2nd line after the header into this string
-			while (line != null) // loop through the entire file
+			while (line != null && ords < 25) // loop through the entire file
 				{
 					String[] entries = line.split(","); // split into an array
-					Order orders = new Order(Integer.parseInt(entries[0]),entries[1],entries[2],Double.parseDouble(entries[3]), entries[4]);// put the entries into an object
-					ordersArr[ords] = orders;
-					ords++; // increment the row
+					// put the entries into an object
+					Order orders = new Order(
+							Integer.parseInt(entries[0]), //Order_ID
+							entries[1], //Customer Name
+							entries[2], //Product
+							Double.parseDouble(entries[3]), //Price
+							entries[4]); //Date
+					ordersArr[ords] = orders; // put the objects into an Order array
+					ords++; // increment
+					
 					line = ordersFile.readLine(); // read another line
 				} // end of while loop
 				
 				ordersFile.close();
-				return ords;
+				return ords; // Returning the amount of orders saved
 			}
 		catch (IOException e) 
 			{
@@ -34,46 +41,108 @@ public class OrderDB implements OrderDBInterface {
 		return -1; // No orders loaded
 	}
 	
-	/*public int saveOrders(String fileName) {
+	public int saveOrders(String fileName) {
 		try {
-			BufferedWriter writeOrders = new BufferedWriter(new FileWriter(fileName));
-			writeOrders.write("Order_ID,Customer_Name,Product,Total_Amt,Order_Date\n");
-			int rows = 0;
+			BufferedWriter writeOrders = new BufferedWriter(new FileWriter(fileName)); //open the file we will write to
+			writeOrders.write("Order_ID,Customer_Name,Product,Total_Amt,Order_Date\n"); // Header
+			int ords = 0;
 			for (int i = 0; i < ordersArr.length; i++) {
 				writeOrders.write(String.format("%d,%s,%s,%.2f,%s", 
-						Integer.parseInt(ordersArr[i][0]), 
-						ordersArr[i][1], 
-						ordersArr[i][2],
-						Double.parseDouble(ordersArr[i][3]),
-						ordersArr[i][4]));
+						ordersArr[i].getOrderID(), 
+						ordersArr[i].getCustName(), 
+						ordersArr[i].getProduct(),
+						ordersArr[i].getPrice(),
+						ordersArr[i].getDate()));
 				writeOrders.newLine();
-				rows++;
+				ords++;
 			}
 			writeOrders.close();
-			return rows;
+			return ords;
 		}
 		catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 		return -1; 
-	}*/
-	
+	}
 	
 	public void showOrders() {
 		System.out.printf("%-10s %-30s %-10s\n", "Order ID", "Product", "Total Amt" );
 		System.out.printf("%-10s %-30s %-10s\n", "--------", "----------", "----------" );
-		for (int i = 0; i < ordersArr.length; i+=5) {
-			System.out.printf("%-10s %-30s $%-10s\n", ordersArr[i], ordersArr[i+2], ordersArr[i+3]);
+		for (int i = 0; i < ordersArr.length; i++) {
+			System.out.printf("%-10s %-30s $%-10s\n", ordersArr[i].getOrderID(), ordersArr[i].getProduct(), ordersArr[i].getPrice());
 		}
 	}
 	
-	/*public boolean add(Order order) {
-		String[][] newArr = new String[5][(ordersArr[0].length) + 1];
-		newArr = ordersArr;
-		int rows = 0;
-		for (int i = 0; i < ordersArr[rows].length; i++) {
-			//newArr[][rows] = order;
+	public boolean add(Order order) {
+		Order[] tempArrs = new Order[(ordersArr.length)+1];
+		for (int i = 0; i < ordersArr.length; i++) {
+			tempArrs[i] = ordersArr[i];
 		}
-	}*/
+		tempArrs[ordersArr.length] = order;
+		
+		ordersArr = tempArrs;
+		
+		
+		if (ordersArr[(ordersArr.length)-1].getDate().equals("0/0/0")) {
+		return false;	
+		} else {
+			return true;
+		}
+	}
+
+
+	@Override
+	public void add(int index, Order order) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Order get(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int searchByOrderID(int orderID) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Order remove(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Order set(int index, Order order) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int size() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int capacity() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void resize() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
