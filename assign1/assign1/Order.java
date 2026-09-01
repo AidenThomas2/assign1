@@ -8,7 +8,6 @@ public class Order {
 	private String date;
 	
 	public Order() {
-		this.date = "0/0/0";
 	}
 	
 	public Order(int id, String name, String product, double price, String date) {
