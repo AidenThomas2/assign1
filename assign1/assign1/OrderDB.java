@@ -15,7 +15,7 @@ public class OrderDB implements OrderDBInterface {
 			ordersFile.readLine(); //get rid of that header
 			int ords = 0; // orders
 			String line = ordersFile.readLine(); // put the 2nd line after the header into this string
-			while (line != null && ords < 25) // loop through the entire file
+			while (line != null && (ords < ordersArr.length)) // loop through the entire file
 				{
 					String[] entries = line.split(","); // split into an array
 					// put the entries into an object
@@ -32,21 +32,22 @@ public class OrderDB implements OrderDBInterface {
 				} // end of while loop
 				
 				ordersFile.close();
-				return ords; // Returning the amount of orders saved
+				return ords; // Returning the amount of orders loaded
 			}
 		catch (IOException e) 
 			{
 				System.out.println(e.getMessage());
 			}
-		return -1; // No orders loaded
+		return 0; // No orders loaded
 	}
 	
 	public int saveOrders(String fileName) {
 		try {
 			BufferedWriter writeOrders = new BufferedWriter(new FileWriter(fileName)); //open the file we will write to
 			writeOrders.write("Order_ID,Customer_Name,Product,Total_Amt,Order_Date\n"); // Header
-			int ords = 0;
-			for (int i = 0; i < ordersArr.length; i++) {
+			int ords = 0; // number of orders saved
+			for (int i = 0; i < ordersArr.length; i++) { // go through our array, get each entry and formatting it so the class can read it
+				if (ordersArr[i] != null) {
 				writeOrders.write(String.format("%d,%s,%s,%.2f,%s", 
 						ordersArr[i].getOrderID(), 
 						ordersArr[i].getCustName(), 
@@ -55,35 +56,38 @@ public class OrderDB implements OrderDBInterface {
 						ordersArr[i].getDate()));
 				writeOrders.newLine();
 				ords++;
+				}
 			}
 			writeOrders.close();
-			return ords;
+			return ords; //returning the amount of orders saved
 		}
 		catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-		return -1; 
+		return 0;  // no orders saved
 	}
 	
 	public void showOrders() {
 		System.out.printf("%-10s %-30s %-10s\n", "Order ID", "Product", "Total Amt" );
 		System.out.printf("%-10s %-30s %-10s\n", "--------", "----------", "----------" );
 		for (int i = 0; i < ordersArr.length; i++) {
+			if (ordersArr[i] != null) {
 			System.out.printf("%-10s %-30s $%-10s\n", ordersArr[i].getOrderID(), ordersArr[i].getProduct(), ordersArr[i].getPrice());
+			}
 		}
 	}
 	
 	public boolean add(Order order) {
-		Order[] tempArrs = new Order[(ordersArr.length)+1];
-		for (int i = 0; i < ordersArr.length; i++) {
+		Order[] tempArrs = new Order[(ordersArr.length) + 1]; // create a new array, exactly one element bigger than our order array
+		for (int i = 0; i < ordersArr.length; i++) { // copy the old array into a temporary array
 			tempArrs[i] = ordersArr[i];
 		}
-		tempArrs[ordersArr.length] = order;
+		tempArrs[tempArrs.length-1] = order; //add the new order into the last place within the array
 		
-		ordersArr = tempArrs;
+		ordersArr = tempArrs; // point our outside array to this array
 		
 		
-		if (ordersArr[(ordersArr.length)-1] == order) {
+		if (ordersArr[(ordersArr.length)-1] == order) { // check to see if the latest order is the one sent in
 		return true;	
 		} else {
 			return false;
@@ -120,7 +124,7 @@ public class OrderDB implements OrderDBInterface {
 	@Override
 	public int searchByOrderID(int orderID) {
 		for (int i = 0; i < ordersArr.length; i++) {
-			if (ordersArr[i].getOrderID() == orderID ) {
+			if ( (ordersArr[i] != null) && (ordersArr[i].getOrderID() == orderID)) {
 				return i;
 			}
 		}
@@ -133,8 +137,7 @@ public class OrderDB implements OrderDBInterface {
 		for (int i = 0; i < index; i++) {
 			tempArr[i] = ordersArr[i];
 		}
-		Order o = new Order();
-		o = ordersArr[index];
+		Order o = ordersArr[index];
 		for (int i = index+1; i < ordersArr.length; i++) {
 			tempArr[i-1] = ordersArr[i];
 		}
