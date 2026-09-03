@@ -21,7 +21,9 @@ public class Driver {
 		o.loadOrders("orders.txt");
 		// testing my add methods
 		Order ord1 = new Order(2123, "Aiden Thomas", "Standing Desk", 90.23, "20/21/26");
-		o.add(ord1);
+		if (o.add(ord1)); {
+			System.out.println("*** Your order had successfully been added! ***");
+		}
 		o.add(34, new Order(1992, "John Travolta", "Record Label", 110.02, "4/19/1999"));
 		o.showOrders();
 		System.out.println("***************************");

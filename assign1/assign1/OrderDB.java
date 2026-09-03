@@ -97,34 +97,34 @@ public class OrderDB implements OrderDBInterface {
 
 	@Override
 	public void add(int index, Order order) {
-		Order[] tempArrs = new Order[(ordersArr.length)+1];
+		Order[] tempArrs = new Order[(ordersArr.length)+1]; // make a new array that is one bigger than the outside one
 		for (int i = 0; i < index; i++) {
-			tempArrs[i] = ordersArr[i];
+			tempArrs[i] = ordersArr[i]; // copy everything before the index
 		}
-		tempArrs[index] = order;
+		tempArrs[index] = order; // copy the index
 		for (int i = index; i < ordersArr.length ; i++) {
-			tempArrs[i + 1] = ordersArr[i];
+			tempArrs[i + 1] = ordersArr[i]; // copy everything after the index
 		}
 		
-		ordersArr = tempArrs;
+		ordersArr = tempArrs; // make our outside array point to this one
 	}
 
 	@Override
 	public void clear() {
 		for (int i = 0; i < ordersArr.length; i++) {
-			ordersArr[i] = null;
+			ordersArr[i] = null; // go through the array and set every index to null
 		}
 	}
 
 	@Override
 	public Order get(int index) {
-		return ordersArr[index];
+		return ordersArr[index]; // just returns a specific order at this index
 	}
 
 	@Override
 	public int searchByOrderID(int orderID) {
 		for (int i = 0; i < ordersArr.length; i++) {
-			if ( (ordersArr[i] != null) && (ordersArr[i].getOrderID() == orderID)) {
+			if ( (ordersArr[i] != null) && (ordersArr[i].getOrderID() == orderID)) { // searches through the entire 
 				return i;
 			}
 		}
@@ -135,13 +135,13 @@ public class OrderDB implements OrderDBInterface {
 	public Order remove(int index) {
 		Order[] tempArr = new Order[(ordersArr.length) - 1];
 		for (int i = 0; i < index; i++) {
-			tempArr[i] = ordersArr[i];
+			tempArr[i] = ordersArr[i]; // copy everything before the index
 		}
-		Order o = ordersArr[index];
+		Order o = ordersArr[index]; //copy the removed one
 		for (int i = index+1; i < ordersArr.length; i++) {
-			tempArr[i-1] = ordersArr[i];
+			tempArr[i-1] = ordersArr[i]; // copy those after the removed index and shift the the left
 		}
-		ordersArr = tempArr;
+		ordersArr = tempArr;  // make our outside array point to this one
 		return o;
 	}
 
@@ -149,14 +149,14 @@ public class OrderDB implements OrderDBInterface {
 	public Order set(int index, Order order) {
 		Order[] tempArr = new Order[ordersArr.length];
 		for (int i = 0; i < index; i++) {
-			tempArr[i] = ordersArr[i];
+			tempArr[i] = ordersArr[i]; // copy everything before the index
 		}
-		Order o = ordersArr[index];
+		Order o = ordersArr[index]; // replace the index
 		tempArr[index] = order;
 		for (int i = index + 1; i < ordersArr.length; i++) {
-			tempArr[i] = ordersArr[i];
+			tempArr[i] = ordersArr[i];  // copy everything after the index
 		}
-		ordersArr = tempArr;
+		ordersArr = tempArr;  // make our outside array point to this one
 		return o;
 	}
 
@@ -165,14 +165,14 @@ public class OrderDB implements OrderDBInterface {
 		int size = 0;
 		for (int i = 0; i < ordersArr.length; i++) {
 			if (ordersArr[i] != null) {
-				size++;	
+				size++;	// goes through the entire array and counts how many non null objects there are in the array
 			}
 		}
 		return size;
 	}
 
 	@Override
-	public int capacity() {
+	public int capacity() { // returns the capactiy
 		return ordersArr.length;
 	}
 
@@ -180,9 +180,9 @@ public class OrderDB implements OrderDBInterface {
 	public void resize() {
 		Order[] tempArr = new Order[(ordersArr.length)+25];
 		for (int i = 0; i < ordersArr.length; i++) {
-			tempArr[i] = ordersArr[i];
+			tempArr[i] = ordersArr[i]; // makes a new array 25 elements bigger and copies everything to it
 		}
-		ordersArr = tempArr;
+		ordersArr = tempArr;  // make our outside array point to this one
 	}
 
 }
